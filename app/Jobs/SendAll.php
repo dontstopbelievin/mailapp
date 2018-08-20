@@ -70,7 +70,7 @@ class SendAll implements ShouldQueue
             Mail::to($this->reciever)->send(new SendAllMails($this->my_message));
         }catch(\Swift_RfcComplianceException $e){
           //INCORRECT EMAIL --DELAY FOR TOMMOROW--
-          dump($this->recievers);
+          //dump($this->reciever);
           $timelapse = strtotime('tomorrow') - time();
           $this->job->release($timelapse);
         }catch(\Swift_TransportException $e){

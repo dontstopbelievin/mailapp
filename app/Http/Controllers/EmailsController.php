@@ -126,7 +126,7 @@ class EmailsController extends Controller
       $available_postman = \DB::table('emails')->where('status', 0)->first();
       if ($available_postman) {
           // REMOVE for ON DEPLOYMENT
-          for ($i=0; $i <50 ; $i++) {
+          for ($i=0; $i <1 ; $i++) {
             SendAll::dispatch($request->input('content'), trim($reciever));
           }
 
