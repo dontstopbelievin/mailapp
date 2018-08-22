@@ -8,7 +8,7 @@
         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal">Добавить почту</button>
       </div>
       <div class="row col-md-12" style=" color: #777">
-        Максимальное количество сообщений в день: 500
+        Максимальное количество сообщений одной почты в день: 500
       </div>
       <div class="col-md-6 text-center">
         <h4>Активные почты</h4>

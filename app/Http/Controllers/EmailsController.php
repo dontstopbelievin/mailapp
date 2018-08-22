@@ -130,14 +130,14 @@ class EmailsController extends Controller
 
   public function send_all(Request $request){
     $recievers = explode("\n", $request->input('recievers'));
+    $message = 'Сообщения загружены в очередь.';
     foreach ($recievers as $reciever) {
       $available_postman = \DB::table('emails')->where('status', 0)->first();
       if ($available_postman) {
           // REMOVE for ON DEPLOYMENT
           SendAll::dispatch($request->input('content'), trim($reciever));
-
       }else{
-        dump('ERROR NO AVAILABLE POSTMAN');
+        $message = 'ERROR NO AVAILABLE POSTMAN';
         break;
       }
     }
@@ -145,7 +145,7 @@ class EmailsController extends Controller
     //dd(Config::get('mail'));
     //dd($request->input('emails'));
     //dd($request->input('emails'));
-
+    session()->flash('error', $message);
     return redirect('/home');
   }
 }

@@ -4,7 +4,7 @@
 <div class="container">
   <div class="flex-center position-ref full-height">
     <div class="row col-md-12" style=" color: #777">
-      Максимальное количество попыток отправки: 10
+      Максимальное количество попыток отправки одного сообщения: 10
     </div>
     <div class="table">
       <table class="table_source text-center" border=1 align=center>
