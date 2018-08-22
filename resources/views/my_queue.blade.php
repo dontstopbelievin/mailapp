@@ -38,6 +38,7 @@
           <tr><td colspan=4>Список пуст</td></tr>
         @endif
       </table>
+      {{ $jobs->links() }}
     </div>
   </div>
 </div>

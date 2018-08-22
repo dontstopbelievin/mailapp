@@ -16,7 +16,7 @@ class EmailsController extends Controller
   }
 
   public function my_queue(){
-    $jobs = \DB::table('jobs')->get();
+    $jobs = \DB::table('jobs')->paginate(25);
     return view('my_queue')->with('jobs', $jobs);
   }
 
@@ -31,7 +31,7 @@ class EmailsController extends Controller
   }
 
   public function failed_queue(){
-    $failed_jobs = \DB::table('failed_jobs')->get();
+    $failed_jobs = \DB::table('failed_jobs')->paginate(20);
     return view('failed_queue')->with('failed_jobs', $failed_jobs);
   }
 
@@ -126,7 +126,7 @@ class EmailsController extends Controller
       $available_postman = \DB::table('emails')->where('status', 0)->first();
       if ($available_postman) {
           // REMOVE for ON DEPLOYMENT
-          for ($i=0; $i <1 ; $i++) {
+          for ($i=0; $i <50 ; $i++) {
             SendAll::dispatch($request->input('content'), trim($reciever));
           }
 

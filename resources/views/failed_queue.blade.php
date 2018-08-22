@@ -27,6 +27,7 @@
               </tr>
           @endforeach
           </table>
+          {{ $failed_jobs->links() }}
           <div style="padding:10px;">
             <form method="post" action="try_again_all" style="display:inline-block;">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
