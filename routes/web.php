@@ -12,10 +12,7 @@
 */
 Auth::routes();
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
+Route::get('/', 'EmailsController@guest');
 Route::get('/home', 'EmailsController@index')->middleware('auth');
 Route::post('/send_all', 'EmailsController@send_all')->middleware('auth');
 Route::get('/my_queue', 'EmailsController@my_queue')->middleware('auth');

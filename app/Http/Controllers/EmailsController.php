@@ -6,9 +6,17 @@ use App\Emails;
 use App\Jobs\SendAll;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Support\Facades\Auth;
 
 class EmailsController extends Controller
 {
+
+  public function guest(Request $request){
+    if (Auth::check()) {
+      return redirect('/home');
+    }
+    return view('auth.login');
+  }
 
   public function index(){
     $emails = Emails::all();
