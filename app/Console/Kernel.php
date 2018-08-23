@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
           foreach ($emails as $email) {
             if($email->mails_today != 0){
                 \DB::table('emails')->where('id', $email->id)->update(['mails_total' => $email->mails_total+$email->mails_today]);
+                \DB::table('emails')->where('id', $email->id)->update(['status' => 0]);
             }
           }
           \DB::table('emails')->update(['mails_today' => 0]);
