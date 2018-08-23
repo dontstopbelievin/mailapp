@@ -26,6 +26,15 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->call(function () {
+          $emails = \DB::table('emails')->get();
+          foreach ($emails as $email) {
+            if($email->mails_today != 0){
+                \DB::table('emails')->where('id', $email->id)->update(['mails_total' => $email->mails_total+$email->mails_today]);
+            }
+          }
+          \DB::table('emails')->update(['mails_today' => 0]);
+        })->daily();
     }
 
     /**
