@@ -40,6 +40,7 @@
         relative_urls: false,
         remove_script_host : false,
         convert_urls : true,
+        language: 'ru',
         file_browser_callback : function(field_name, url, type, win) {
             var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
             var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;

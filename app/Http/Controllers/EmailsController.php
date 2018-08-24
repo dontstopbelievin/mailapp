@@ -131,7 +131,7 @@ class EmailsController extends Controller
   }
 
   public function send_all(Request $request){
-
+    //dd($request->input('content'));
     $validator = Validator::make($request->all(),[
       'content' => 'required',
       'recievers' => 'required',
