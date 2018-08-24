@@ -7,6 +7,8 @@ use App\Jobs\SendAll;
 use Illuminate\Http\Request;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Input;
 
 class EmailsController extends Controller
 {
@@ -129,16 +131,49 @@ class EmailsController extends Controller
   }
 
   public function send_all(Request $request){
+
+    $validator = Validator::make($request->all(),[
+      'content' => 'required',
+      'recievers' => 'required',
+      //'my_excel' => 'required'
+    ]);
+
+    if($validator->fails()){
+      $response = $validator->messages();
+      session()->flash('my_error', $response);
+      return redirect('home');
+    }
+
+    /*try{
+        Excel::load(Input::file('my_excel'), function ($reader) {
+          dd($reader->toArray());
+            foreach ($reader->toArray() as $row) {
+                dump($row);
+            }
+        });
+        dd('end');
+        \Session::flash('success', 'Users uploaded successfully.');
+        return redirect('home');
+    }catch (\Exception $e){
+        \Session::flash('error', $e->getMessage());
+        return redirect('home');
+    }*/
+
     $recievers = explode("\n", $request->input('recievers'));
-    $message = 'Сообщения загружены в очередь.';
+    $message = 'Сообщения загружены в очередь. ';
+    $message .= 'Email-ы не прошедшие валидацию: ';
     foreach ($recievers as $reciever) {
-      $available_postman = \DB::table('emails')->where('status', 0)->first();
-      if ($available_postman) {
-          // REMOVE for ON DEPLOYMENT
-          SendAll::dispatch($request->input('content'), trim($reciever));
+      if(filter_var(trim($reciever), FILTER_VALIDATE_EMAIL)){
+        $available_postman = \DB::table('emails')->where('status', 0)->first();
+        if ($available_postman) {
+            // REMOVE for ON DEPLOYMENT
+            SendAll::dispatch($request->input('content'), trim($reciever));
+        }else{
+          $message = 'ERROR NO AVAILABLE POSTMAN';
+          break;
+        }
       }else{
-        $message = 'ERROR NO AVAILABLE POSTMAN';
-        break;
+          $message .= trim($reciever).' ';
       }
     }
     //return view('test')->with('recievers', $recievers);
