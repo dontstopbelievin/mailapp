@@ -15,13 +15,14 @@
         <div class="table">
           <table class="table_source text-center" border=1 align=center>
             <tr>
-              <th>Emails</th><th>Сегодня отправлено</th><th>Всего неудачных попыток</th><th>Действие</th>
+              <th>Emails</th><th>Сегодня отправлено</th><th>Всего отправлено</th><th>Всего неудачных попыток</th><th>Действие</th>
             </tr>
           @if(count($emails['active']) > 0)
             @foreach ($emails['active'] as $email)
                 <tr>
                   <td>{{ $email->email }}</td>
                   <td>{{ $email->mails_today }}</td>
+                  <td>{{ $email->mails_total }}</td>
                   <td>{{ $email->attempts_total }}</td>
                   <td><button class="btn btn-sm btn-danger" data-id="{{$email->id}}" data-toggle="modal" data-target="#delete_modal">Удалить</button>
                     <form action="{{'/disable_email/'.$email->id}}" method="post">
@@ -31,7 +32,7 @@
                 </tr>
             @endforeach
           @else
-            <tr><td colspan=4>Список пуст</td></tr>
+            <tr><td colspan=5>Список пуст</td></tr>
           @endif
           </table>
         </div>
@@ -41,13 +42,14 @@
         <div class="table">
           <table class="table_source text-center" border=1 align=center>
             <tr>
-              <th>Emails</th><th>Сегодня отправлено</th><th>Всего неудачных попыток</th><th>Действие</th>
+              <th>Emails</th><th>Сегодня отправлено</th><th>Всего отправлено</th><th>Всего неудачных попыток</th><th>Действие</th>
             </tr>
           @if(count($emails['inactive']) > 0)
             @foreach ($emails['inactive'] as $email)
                 <tr>
                   <td>{{ $email->email }}</td>
                   <td>{{ $email->mails_today }}</td>
+                  <td>{{ $email->mails_total }}</td>
                   <td>{{ $email->attempts_total }}</td>
                   <td><button class="btn btn-sm btn-danger" data-id="{{$email->id}}" data-toggle="modal" data-target="#delete_modal">Удалить</button>
                   @if($email->status == 2)
@@ -60,7 +62,7 @@
                 </tr>
             @endforeach
           @else
-            <tr><td colspan=4>Список пуст</td></tr>
+            <tr><td colspan=5>Список пуст</td></tr>
           @endif
           </table>
         </div>
