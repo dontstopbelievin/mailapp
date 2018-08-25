@@ -13,6 +13,60 @@ use Illuminate\Support\Facades\Input;
 class EmailsController extends Controller
 {
 
+  public function send_all(Request $request){
+    //dd($request->input('content'));
+    $validator = Validator::make($request->all(),[
+      'content' => 'required',
+      'recievers' => 'required',
+      //'my_excel' => 'required'
+    ]);
+
+    if($validator->fails()){
+      $response = $validator->messages();
+      session()->flash('my_error', $response);
+      return redirect('home');
+    }
+
+    /*try{
+        Excel::load(Input::file('my_excel'), function ($reader) {
+          dd($reader->toArray());
+            foreach ($reader->toArray() as $row) {
+                dump($row);
+            }
+        });
+        dd('end');
+        \Session::flash('success', 'Users uploaded successfully.');
+        return redirect('home');
+    }catch (\Exception $e){
+        \Session::flash('error', $e->getMessage());
+        return redirect('home');
+    }*/
+
+    $recievers = explode("\n", $request->input('recievers'));
+    $message = 'Сообщения загружены в очередь. ';
+    $message .= 'Email-ы не прошедшие валидацию: ';
+    foreach ($recievers as $reciever) {
+      if(filter_var(trim($reciever), FILTER_VALIDATE_EMAIL)){
+        $available_postman = \DB::table('emails')->where('status', 0)->first();
+        if ($available_postman) {
+            // REMOVE for ON DEPLOYMENT
+            SendAll::dispatch($request->input('content'), trim($reciever));
+        }else{
+          $message = 'ERROR NO AVAILABLE POSTMAN';
+          break;
+        }
+      }else{
+          $message .= trim($reciever).' ';
+      }
+    }
+    //return view('test')->with('recievers', $recievers);
+    //dd(Config::get('mail'));
+    //dd($request->input('emails'));
+    //dd($request->input('emails'));
+    session()->flash('error', $message);
+    return redirect('/home');
+  }
+
   public function guest(Request $request){
     if (Auth::check()) {
       return redirect('/home');
@@ -23,6 +77,10 @@ class EmailsController extends Controller
   public function index(){
     $emails = Emails::all();
     return view('emails')->with('emails', $emails);
+  }
+
+  public function proxy(){
+    return view('proxy');
   }
 
   public function my_queue(){
@@ -128,59 +186,5 @@ class EmailsController extends Controller
     $email->status = 2;
     $email->save();
     return redirect('my_postmans');
-  }
-
-  public function send_all(Request $request){
-    //dd($request->input('content'));
-    $validator = Validator::make($request->all(),[
-      'content' => 'required',
-      'recievers' => 'required',
-      //'my_excel' => 'required'
-    ]);
-
-    if($validator->fails()){
-      $response = $validator->messages();
-      session()->flash('my_error', $response);
-      return redirect('home');
-    }
-
-    /*try{
-        Excel::load(Input::file('my_excel'), function ($reader) {
-          dd($reader->toArray());
-            foreach ($reader->toArray() as $row) {
-                dump($row);
-            }
-        });
-        dd('end');
-        \Session::flash('success', 'Users uploaded successfully.');
-        return redirect('home');
-    }catch (\Exception $e){
-        \Session::flash('error', $e->getMessage());
-        return redirect('home');
-    }*/
-
-    $recievers = explode("\n", $request->input('recievers'));
-    $message = 'Сообщения загружены в очередь. ';
-    $message .= 'Email-ы не прошедшие валидацию: ';
-    foreach ($recievers as $reciever) {
-      if(filter_var(trim($reciever), FILTER_VALIDATE_EMAIL)){
-        $available_postman = \DB::table('emails')->where('status', 0)->first();
-        if ($available_postman) {
-            // REMOVE for ON DEPLOYMENT
-            SendAll::dispatch($request->input('content'), trim($reciever));
-        }else{
-          $message = 'ERROR NO AVAILABLE POSTMAN';
-          break;
-        }
-      }else{
-          $message .= trim($reciever).' ';
-      }
-    }
-    //return view('test')->with('recievers', $recievers);
-    //dd(Config::get('mail'));
-    //dd($request->input('emails'));
-    //dd($request->input('emails'));
-    session()->flash('error', $message);
-    return redirect('/home');
   }
 }

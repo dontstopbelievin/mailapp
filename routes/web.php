@@ -14,6 +14,7 @@ Auth::routes();
 
 Route::get('/', 'EmailsController@guest');
 Route::get('/home', 'EmailsController@index')->middleware('auth');
+Route::get('/proxy', 'EmailsController@proxy')->middleware('auth');
 Route::post('/send_all', 'EmailsController@send_all')->middleware('auth');
 Route::get('/my_queue', 'EmailsController@my_queue')->middleware('auth');
 Route::get('/failed_queue', 'EmailsController@failed_queue')->middleware('auth');
