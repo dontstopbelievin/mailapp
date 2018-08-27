@@ -74,7 +74,7 @@ class SendAll implements ShouldQueue
           $timelapse = strtotime('tomorrow') - time();
           $this->job->release($timelapse);
         }catch(\Swift_TransportException $e){
-          //dump($e);
+          dump($e);
           // RELEASING JOB TO THE QUEUE AND CHANGING POSTMAN IF POSSIBLE --EXCEEDED MESSAGE LIMIT--
           if((\Config::get('mail.username')) != null && (\Config::get('mail.username')) != '')
           {
