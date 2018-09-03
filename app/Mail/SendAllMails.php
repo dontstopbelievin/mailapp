@@ -37,6 +37,6 @@ class SendAllMails extends Mailable
      */
     public function build()
     {
-        return $this->view('my_mail')->with('my_message', $this->my_message);
+        return $this->subject('Sendmailapp')->view('my_mail')->with('my_message', $this->my_message);
     }
 }

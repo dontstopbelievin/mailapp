@@ -19,6 +19,7 @@ class SendAll implements ShouldQueue
 
     protected $my_message;
     protected $reciever;
+    public $tries = 3;
     /**
      * Create a new job instance.
      *
