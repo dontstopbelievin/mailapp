@@ -3,23 +3,31 @@
 @section('content')
 <div class="container">
   <div class="flex-center position-ref full-height">
-      <div class="content text-center">
+      <div class="content">
         <form method="post" action="/send_all" enctype="multipart/form-data">
           <input type="hidden" name="_token" value="{{ csrf_token() }}">
-          <div class="form-group col-md-8 offset-2">
-            <label for="input">Ваше сообщение:</label>
-            <textarea class="tinmce_textarea form-control" name="content" id="input" rows="10"></textarea>
-          </div>
-          <div class="form-group col-md-6 offset-3">
-            <label for="price">Кому:</label>
-            <textarea type="text" class="form-control" name="recievers" rows=4 required></textarea>
-          </div>
-          <div class="form-group col-md-6 offset-3">
-            <label for="price">Кому:</label>
-            <input type="file" name="my_excel">
+          <div class="form-group col-md-12" style="margin:0px">
+            <button type="submit" class="btn btn-success">Отправить</button>
           </div>
           <div class="form-group col-md-12">
-            <button type="submit" class="btn btn-success">Отправить</button>
+              <table class="mailable">
+                <tr>
+                  <td colspan="2"><hr></td>
+                </tr>
+                <tr>
+                  <td valign="top"><label for="price">Кому:</label></td>
+                  <td><input type="text" class="form-control" name="recievers" required>
+                  <input type="file" name="my_excel" disabled></td>
+                </tr>
+                <tr>
+                  <td><label for="input">Тема:</label></td>
+                  <td><input class="form-control" name="subject"></td>
+                </tr>
+                <tr>
+                  <td><label for="input"></label></td>
+                  <td><textarea class="tinmce_textarea form-control" name="content" id="input" rows="10"></textarea></td>
+                </tr>
+              </table>
           </div>
         </form>
       </div>

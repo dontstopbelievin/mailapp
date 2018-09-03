@@ -18,6 +18,7 @@ class SendAll implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     protected $my_message;
+    protected $my_subject;
     protected $reciever;
     public $tries = 3;
     /**
@@ -25,8 +26,9 @@ class SendAll implements ShouldQueue
      *
      * @return void
      */
-    public function __construct($my_message, $reciever)
+    public function __construct($my_subject, $my_message, $reciever)
     {
+        $this->my_subject = $my_subject;
         $this->my_message = $my_message;
         $this->reciever = $reciever;
     }
@@ -68,7 +70,7 @@ class SendAll implements ShouldQueue
             }
 
             // TRY SENDING MESSAGE
-            Mail::to($this->reciever)->send(new SendAllMails($this->my_message));
+            Mail::to($this->reciever)->send(new SendAllMails($this->my_subject, $this->my_message));
         }catch(\Swift_RfcComplianceException $e){
           //INCORRECT EMAIL --DELAY FOR TOMMOROW--
           //dump($this->reciever);

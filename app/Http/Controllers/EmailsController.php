@@ -42,7 +42,7 @@ class EmailsController extends Controller
         return redirect('home');
     }*/
 
-    $recievers = explode("\n", $request->input('recievers'));
+    $recievers = explode(",", $request->input('recievers'));
     $message = 'Сообщения загружены в очередь. ';
     $message .= 'Email-ы не прошедшие валидацию: ';
     foreach ($recievers as $reciever) {
@@ -50,7 +50,7 @@ class EmailsController extends Controller
         $available_postman = \DB::table('emails')->where('status', 0)->first();
         if ($available_postman) {
             // REMOVE for ON DEPLOYMENT
-            SendAll::dispatch($request->input('content'), trim($reciever));
+            SendAll::dispatch($request->input('subject'), $request->input('content'), trim($reciever));
         }else{
           $message = 'ERROR NO AVAILABLE POSTMAN';
           break;
