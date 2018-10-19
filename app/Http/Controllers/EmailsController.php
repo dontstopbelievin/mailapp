@@ -80,7 +80,8 @@ class EmailsController extends Controller
   }
 
   public function proxy(){
-    return view('proxy');
+    $domains = \DB::table('domains')->paginate(15);
+    return view('proxy')->with('domains', $domains);
   }
 
   public function my_queue(){
