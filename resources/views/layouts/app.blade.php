@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Mail dispatcher</title>
+    <title>Directmail Kazakhstan</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -19,18 +19,21 @@
 </head>
 <body>
     <div id="app">
-      @include('inc.navbar')
-      <div class="container">
-        <div class="card">
-          <div class="card-body">
-            <div class="py-4">
-              @include('inc.messages')
-              @yield('content')
-            </div>
+      <div class="container-fluid h-100">
+          <div class="row h-100">
+              @include('inc.sidebar')
+              <div class="container">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="py-4">
+                      @include('inc.messages')
+                      @yield('content')
+                    </div>
+                  </div>
+                </div>
+              </div>>
           </div>
-        </div>
-        </div>
-      @include('inc.footer')
+      </div>
     </div>
 
 </body>

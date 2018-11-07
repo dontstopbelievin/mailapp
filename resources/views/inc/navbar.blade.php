@@ -5,7 +5,8 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<!-- Brand -->
-  <a href="/home" class="navbar-brand"><img src="/storage/images/logo.png" style="width:auto; height:25px;"></a>
+	<a href="/home" class="navbar-brand"><img src="/storage/images/mail4.png" style="width:auto; height:40px;"></a>
+  <a href="/home" class="navbar-brand"><img src="/storage/images/logo3.png" style="width:auto; height:20px;"></a>
 
   <!-- Links -->
 	@guest
