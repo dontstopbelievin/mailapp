@@ -84,6 +84,15 @@ class EmailsController extends Controller
     return view('proxy')->with('domains', $domains);
   }
 
+  public function hash(){
+    return view('hash');
+  }
+
+  public function makehash(Request $request){
+    $hash = \Hash::make($request['password']);
+    return view('makehash')->with('hash', $hash);
+  }
+
   public function my_queue(){
     $jobs = \DB::table('jobs')->paginate(25);
     return view('my_queue')->with('jobs', $jobs);
