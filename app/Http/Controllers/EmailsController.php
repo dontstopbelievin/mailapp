@@ -84,6 +84,16 @@ class EmailsController extends Controller
     return view('proxy')->with('domains', $domains);
   }
 
+  public function parse1(){
+    $kadastr_tables = \DB::table('kadastr_tables')->select('id', 'kadastr_number')->paginate(15);
+    return view('parse1')->with('kadastr_tables', $kadastr_tables);
+  }
+
+  public function parse1page($id){
+    $html = \DB::table('kadastr_tables')->select('html')->where('id', $id)->first();
+    return view('parse1page')->with('html', $html);
+  }
+
   public function hash(){
     return view('hash');
   }
