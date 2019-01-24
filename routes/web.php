@@ -16,6 +16,7 @@ Route::get('/', 'EmailsController@guest');
 Route::get('/home', 'EmailsController@index')->middleware('auth');
 Route::get('/proxy', 'EmailsController@proxy')->middleware('auth');
 Route::get('/parse1', 'EmailsController@parse1')->middleware('auth');
+Route::post('/parse1/delete', 'EmailsController@parse1delete')->middleware('auth');
 Route::get('/parse1page/{id}', 'EmailsController@parse1page')->middleware('auth');
 Route::get('/hash', 'EmailsController@hash')->middleware('auth');
 Route::post('/makehash', 'EmailsController@makehash')->middleware('auth');

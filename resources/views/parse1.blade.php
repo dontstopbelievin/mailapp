@@ -30,6 +30,14 @@
     <tr style="background-color:rgba(0, 0, 255, 0.05);">
         <th>Кадастровый номер</th>
     </tr>
+    <tr>
+      <td>
+        <form class="" action="/parse1/delete" method="post">
+            <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
+            <button type="submit" class="btn btn-primry">Удалить ошибки с базы</button>
+        </form>
+      </td>
+    </tr>
     <?php $check = true; ?>
     @foreach ($kadastr_tables as $kadastr_table)
     @if($check == true)

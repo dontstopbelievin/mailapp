@@ -9,6 +9,7 @@ use Validator;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Input;
+use App\KadastrTables;
 
 class EmailsController extends Controller
 {
@@ -89,8 +90,20 @@ class EmailsController extends Controller
     return view('parse1')->with('kadastr_tables', $kadastr_tables);
   }
 
+  public function parse1delete(){
+    $kadastr_tables = KadastrTables::select('id', 'kadastr_number', 'html')->get();
+    foreach ($kadastr_tables as $kadastr_table) {
+      $check = 'Прослушивание на http://192.168.8.169:8001/aisgzk.kz/infoservice не выполняла ни одна конечная точка';
+      //$check = '780620301357';
+      if (\strpos($kadastr_table->html, $check) != false) {
+          $kadastr_table->delete();
+      }
+    }
+    return redirect('parse1');
+  }
+
   public function parse1page($id){
-    $html = \DB::table('kadastr_tables')->select('html')->where('id', $id)->first();
+    $html = KadastrTables::select('html')->where('id', $id)->first();
     return view('parse1page')->with('html', $html);
   }
 
