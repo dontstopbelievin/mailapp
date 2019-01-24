@@ -91,7 +91,7 @@ class EmailsController extends Controller
   }
 
   public function parse1delete(){
-    $kadastr_tables = KadastrTables::select('id', 'kadastr_number', 'html')->get();
+    $kadastr_tables = KadastrTables::select('id', 'kadastr_number', 'html')->take(500)->get();
     foreach ($kadastr_tables as $kadastr_table) {
       $check = 'Прослушивание на http://192.168.8.169:8001/aisgzk.kz/infoservice не выполняла ни одна конечная точка';
       $check = '20322041039';
