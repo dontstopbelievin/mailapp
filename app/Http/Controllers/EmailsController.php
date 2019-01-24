@@ -94,7 +94,7 @@ class EmailsController extends Controller
     $kadastr_tables = KadastrTables::select('id', 'kadastr_number', 'html')->get();
     foreach ($kadastr_tables as $kadastr_table) {
       $check = 'Прослушивание на http://192.168.8.169:8001/aisgzk.kz/infoservice не выполняла ни одна конечная точка';
-      //$check = '780620301357';
+      $check = '20322041039';
       if (\strpos($kadastr_table->html, $check) != false) {
           $kadastr_table->delete();
       }
