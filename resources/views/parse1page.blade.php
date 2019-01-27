@@ -18,7 +18,8 @@
     <script src="{{ asset('js/app.js') }}"></script>
 </head>
 <body>
-  <a class="btn btn-primry" href="/parse1">Назад</a>
+  <?php $lpage = $_GET['lpage'];?>
+  <a class="btn btn-primry" href="/parse1?page={{$lpage}}">Назад</a>
   {!! $html->html !!}
 </body>
 </html>

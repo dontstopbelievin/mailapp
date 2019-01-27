@@ -42,12 +42,12 @@
     @foreach ($kadastr_tables as $kadastr_table)
     @if($check == true)
       <tr style="background-color:rgba(0, 0, 255, 0.05);">
-        <td><a class="btn btn-primary btn-sm" href="parse1page/{{$kadastr_table->id}}">{{$kadastr_table->kadastr_number}}</a></td>
+        <td><a class="btn btn-primary btn-sm" href="parse1page/{{$kadastr_table->id}}?lpage={{ $kadastr_tables->currentPage()}}">{{$kadastr_table->kadastr_number}}</a></td>
       </tr>
       <?php $check = false; ?>
     @else
       <tr style="background-color:rgba(0, 255, 0, 0.05);">
-        <td><a class="btn btn-primary btn-sm" href="parse1page/{{$kadastr_table->id}}">{{$kadastr_table->kadastr_number}}</a></td>
+        <td><a class="btn btn-primary btn-sm" href="parse1page/{{$kadastr_table->id}}?lpage={{ $kadastr_tables->currentPage()}}">{{$kadastr_table->kadastr_number}}</a></td>
       </tr>
       <?php $check = true; ?>
     @endif
