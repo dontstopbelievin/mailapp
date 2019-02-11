@@ -86,7 +86,7 @@ class EmailsController extends Controller
   }
 
   public function parse1(){
-    $kadastr_tables = \DB::table('kadastr_tables')->select('id', 'kadastr_number')->paginate(15);
+    $kadastr_tables = \DB::table('kadastr_tables')->select('id', 'kadastr_number')->orderBy('id')->paginate(15);
     return view('parse1')->with('kadastr_tables', $kadastr_tables);
   }
 
