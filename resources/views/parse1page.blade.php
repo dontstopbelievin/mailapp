@@ -20,6 +20,8 @@
 <body>
   <?php $lpage = $_GET['lpage'];?>
   <a class="btn btn-primry" href="/parse1?page={{$lpage}}">Назад</a>
-  {!! $html->html !!}
+  @if(!empty($html->html))
+    {!! $html->html !!}
+  @endif
 </body>
 </html>

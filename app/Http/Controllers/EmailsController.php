@@ -86,7 +86,7 @@ class EmailsController extends Controller
   }
 
   public function parse1(){
-    $kadastr_tables = \DB::table('kadastr_tables')->select('id', 'kadastr_number')->paginate(15);
+    $kadastr_tables = \DB::table('kadastr_tables')->select('id', 'kadastr_number')->orderBy('id')->paginate(15);
     return view('parse1')->with('kadastr_tables', $kadastr_tables);
   }
 
@@ -102,6 +102,11 @@ class EmailsController extends Controller
     return redirect('parse1');
   }
 
+  public function parse1search($kadastr_number){
+    $html = KadastrTables::select('html')->where('kadastr_number', $kadastr_number)->first();
+    return view('parse1page')->with('html', $html);
+  }
+  
   public function parse1page($id){
     $html = KadastrTables::select('html')->where('id', $id)->first();
     return view('parse1page')->with('html', $html);

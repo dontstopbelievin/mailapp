@@ -19,13 +19,17 @@
 </head>
 <body style="margin:20px">
   <style>
-  table, th, td {
+  table, th, td.my_list {
       border: 1px solid black;
       text-align: center;
       margin:auto;
   }
   </style>
-  {{ $kadastr_tables->links() }}
+  <table style="border:0px!important">
+    <tr>
+      <td>{{ $kadastr_tables->links() }}</td><td><a class="btn btn-primary btn-sm" href="parse1search/20321021172?lpage={{ $kadastr_tables->currentPage()}}">20321021172</a></td>
+    </tr>
+  </table>
   <table style="border-collapse: collapse;">
     <tr style="background-color:rgba(0, 0, 255, 0.05);">
         <th>Кадастровый номер</th>

@@ -18,6 +18,7 @@ Route::get('/proxy', 'EmailsController@proxy')->middleware('auth');
 Route::get('/parse1', 'EmailsController@parse1')->middleware('auth');
 Route::post('/parse1/delete', 'EmailsController@parse1delete')->middleware('auth');
 Route::get('/parse1page/{id}', 'EmailsController@parse1page')->middleware('auth');
+Route::get('/parse1search/{kadastr_number}', 'EmailsController@parse1search')->middleware('auth');
 Route::get('/hash', 'EmailsController@hash')->middleware('auth');
 Route::post('/makehash', 'EmailsController@makehash')->middleware('auth');
 Route::post('/send_all', 'EmailsController@send_all')->middleware('auth');
