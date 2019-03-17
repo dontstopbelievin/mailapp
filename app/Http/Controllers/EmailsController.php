@@ -90,6 +90,11 @@ class EmailsController extends Controller
     return view('parse1')->with('kadastr_tables', $kadastr_tables);
   }
 
+  public function parse2(){
+    $kadastr_tables = \DB::table('akkol_tables')->select('id', 'kadastr_number')->orderBy('id')->paginate(15);
+    return view('parse2')->with('kadastr_tables', $kadastr_tables);
+  }
+
   public function parse1delete(){
     $kadastr_tables = KadastrTables::select('id', 'kadastr_number', 'html')->take(500)->get();
     foreach ($kadastr_tables as $kadastr_table) {
@@ -106,10 +111,15 @@ class EmailsController extends Controller
     $html = KadastrTables::select('html')->where('kadastr_number', $kadastr_number)->first();
     return view('parse1page')->with('html', $html);
   }
-  
+
   public function parse1page($id){
     $html = KadastrTables::select('html')->where('id', $id)->first();
     return view('parse1page')->with('html', $html);
+  }
+
+  public function parse2page($id){
+    $html = \DB::table('akkol_tables')->select('html')->where('id', $id)->first();
+    return view('parse2page')->with('html', $html);
   }
 
   public function hash(){
