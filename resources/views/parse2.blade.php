@@ -27,7 +27,7 @@
   </style>
   <table style="border:0px!important">
     <tr>
-      <td>{{ $kadastr_tables->links() }}</td><td><a class="btn btn-primary btn-sm" href="parse1search/20321021172?lpage={{ $kadastr_tables->currentPage()}}">20321021172</a></td>
+      <td>{{ $kadastr_tables->links() }}</td><td><a class="btn btn-primary btn-sm" href="parse2search/20321021172?lpage={{ $kadastr_tables->currentPage()}}">20321021172</a></td>
     </tr>
   </table>
   <table style="border-collapse: collapse;">

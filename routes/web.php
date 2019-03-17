@@ -23,6 +23,7 @@ Route::get('/parse1search/{kadastr_number}', 'EmailsController@parse1search')->m
 
 Route::get('/parse2', 'EmailsController@parse2')->middleware('auth');
 Route::get('/parse2page/{id}', 'EmailsController@parse2page')->middleware('auth');
+Route::get('/parse2search/{kadastr_number}', 'EmailsController@parse2search')->middleware('auth');
 
 Route::get('/hash', 'EmailsController@hash')->middleware('auth');
 Route::post('/makehash', 'EmailsController@makehash')->middleware('auth');

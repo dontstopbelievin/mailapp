@@ -112,6 +112,11 @@ class EmailsController extends Controller
     return view('parse1page')->with('html', $html);
   }
 
+  public function parse2search($kadastr_number){
+    $html = \DB::table('akkol_tables')->select('html')->where('kadastr_number', $kadastr_number)->first();
+    return view('parse2page')->with('html', $html);
+  }
+
   public function parse1page($id){
     $html = KadastrTables::select('html')->where('id', $id)->first();
     return view('parse1page')->with('html', $html);
